@@ -3,20 +3,23 @@
 #include <iostream>
 #include <string>
 #include<cstdlib>//necessary for rand()
-#include <cstdlib> //necessary for rand()
 #include<ctime>
 
 using namespace std;
-@@ -24,53 +24,85 @@ int main() {
+
+int main(int &opNum) {
     int rightnum = 0;
     int mathType = '?'; //[ 1,2,3,4]
     int correctAns = 0;
     int userAns = 0;
     int temp = 0;
+    int leftnum = 0;
+std::string userName;
     //(used to make sure the left number is larger than the right for subtraction)
     char mathSymbol = '?'; //[1 = +, 2 = -, 3 = *, 4 = /];
 
     cout << "What's your name? :";
+    std::cin >> mathSymbol;
     getline(cin, userName); // collect the user detials as one variable
     cout << "*  Welcome " << userName << " to the The Super Simple Math Tutor  *" << endl; //Greeting
     cout << "========================================================"<< endl;
@@ -46,55 +49,53 @@ using namespace std;
 
     leftnum = rand() % 10 + 1;
     rightnum = rand() % 10 + 1;
-    leftNum = rand() % 10 + 1;
-    rightNum = rand() % 10 + 1;
     opNum = rand() % 4 + 1;
 
 
 
     switch (opNum) {
         case 1: // addition
-            correctAns = leftNum + rightNum;
-            cout << leftnum << " + " << rightnum << " = " << correctAns << endl;
+            correctAns = leftnum + rightnum;
+            cout << int leftnum << " + " << rightnum << " = " << correctAns << endl;
             break;
         case 2: // subtraction
-            correctAns = leftNum - rightNum;
-            if (leftNum < rightNum)
-                int tempNum = leftNum;
+            correctAns = leftnum - rightnum;
+            if (leftnum < rightnum)
+                int tempNum = leftnum;
 
     switch (opNum)
     {
     case 1: // addition
-        correctAns = leftNum + rightNum;
+        correctAns = leftnum + rightnum;
         mathSymbol = '+';
         break;
     case 2: // subtraction
-        correctAns = leftNum - rightNum;
+        correctAns = leftnum - rightnum;
         mathSymbol = '-';
-        if (leftNum < rightNum)
+        if (leftnum < rightnum)
         {
-            int tempNum = leftNum;
-            leftNum = rightNum;
-            rightNum = temp;
+            int tempNum = leftnum;
+            leftnum = rightnum;
+            rightnum = temp;
         }
         break;
         case 3: // Multiply
-            correctAns = leftNum * rightNum;
-            if (leftNum < rightNum)
-                leftNum = rightNum;
-            rightNum = temp;
+            correctAns = leftnum * rightnum;
+            if (leftnum < rightnum)
+                leftnum = rightnum;
+            rightnum = temp;
     case 3: // Multiply
-        correctAns = leftNum * rightNum;
+        correctAns = leftnum * rightnum;
         mathSymbol = '*';
         break;
         case 4: // devision
-            correctAns = leftNum / rightNum;
-            int tempNum = leftnum;
-            leftNum = rightNum;
-            rightNum = temp;
+            correctAns = leftnum / rightnum;
+            int tempNum = int leftnum;
+            leftnum = rightnum;
+            rightnum = temp;
     case 4: // devision
-        correctAns = leftNum;
-        leftNum *= rightNum;
+        correctAns = leftnum;
+        leftnum *= rightnum;
         mathSymbol ='/';
         break;
 
@@ -108,9 +109,9 @@ using namespace std;
         default:
             class error_code;
 
-    cout <<userName << " what is " << leftNum << mathSymbol << rightNum  << " = ";
-    cin >> userAnswer;
-    if (userAnswer == correctAns)
+    cout <<userName << " what is " << leftnum << mathSymbol << rightnum  << " = ";
+    cin >> userAns;
+    if (userAns == correctAns)
     {
         cout << "Congrats! It looks like you are a math wizard." << endl;
         cout << "Thank you for playing the game" << endl;
@@ -123,4 +124,5 @@ using namespace std;
     cout << endl;
     cout << "Keep calm and do math!" <<endl;
     return -1;
+
 }
