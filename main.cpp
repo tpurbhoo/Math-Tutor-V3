@@ -8,11 +8,13 @@
 using namespace std;
 
 int main(int &opNum) {
+    const int MAX_ATTEMPTS = 3;
+    const int LEVEL_CHANGE_RANGE= 10;
     int rightnum = 0;
     int mathType = '?'; //[ 1,2,3,4]
     int correctAns = 0;
     int userAns = 0;
-    int temp = 0;
+    int tempNum = 0;
     int leftnum = 0;
 std::string userName;
     //(used to make sure the left number is larger than the right for subtraction)
@@ -76,14 +78,14 @@ std::string userName;
         {
             int tempNum = leftnum;
             leftnum = rightnum;
-            rightnum = temp;
+            rightnum = tempNum;
         }
         break;
         case 3: // Multiply
             correctAns = leftnum * rightnum;
             if (leftnum < rightnum)
                 leftnum = rightnum;
-            rightnum = temp;
+            rightnum = tempNum;
     case 3: // Multiply
         correctAns = leftnum * rightnum;
         mathSymbol = '*';
@@ -92,7 +94,7 @@ std::string userName;
             correctAns = leftnum / rightnum;
             int tempNum = int leftnum;
             leftnum = rightnum;
-            rightnum = temp;
+            rightnum = tempNum;
     case 4: // devision
         correctAns = leftnum;
         leftnum *= rightnum;
@@ -124,5 +126,6 @@ std::string userName;
     cout << endl;
     cout << "Keep calm and do math!" <<endl;
     return -1;
+
 
 }
