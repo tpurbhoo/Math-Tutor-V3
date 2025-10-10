@@ -7,14 +7,26 @@
 
 using namespace std;
 
-int main(int &opNum) {
+int Mathtype;
+
+int main() {
     const int MAX_ATTEMPTS = 3;
+
     const int LEVEL_CHANGE_RANGE= 10;
+
+    enum MathType {MT_ADD = 1, MT_SUB = 2,MT_MUL = 3,MT_DIV = 4};
+
     int rightnum = 0;
-    int mathType = '?'; //[ 1,2,3,4]
+
+    MathType = MT_ADD = 1;
+
     int correctAns = 0;
+
+
     int userAns = 0;
+
     int tempNum = 0;
+
     int leftnum = 0;
 std::string userName;
     //(used to make sure the left number is larger than the right for subtraction)
@@ -51,11 +63,13 @@ std::string userName;
 
     leftnum = rand() % 10 + 1;
     rightnum = rand() % 10 + 1;
-    opNum = rand() % 4 + 1;
+
+    Mathtype =static_cast<MathType>( rand() % 4 + 1);//1 = add,2= subtract,3=mulitply,4=division
 
 
 
-    switch (opNum) {
+
+    switch (Mathtype) {
         case 1: // addition
             correctAns = leftnum + rightnum;
             cout << int leftnum << " + " << rightnum << " = " << correctAns << endl;
@@ -65,13 +79,13 @@ std::string userName;
             if (leftnum < rightnum)
                 int tempNum = leftnum;
 
-    switch (opNum)
+    switch (Mathtype)
     {
-    case 1: // addition
+    case MT_ADD: // addition
         correctAns = leftnum + rightnum;
         mathSymbol = '+';
         break;
-    case 2: // subtraction
+    case MT_SUB: // subtraction
         correctAns = leftnum - rightnum;
         mathSymbol = '-';
         if (leftnum < rightnum)
@@ -81,33 +95,33 @@ std::string userName;
             rightnum = tempNum;
         }
         break;
-        case 3: // Multiply
+        case MT_MUL: // Multiply
             correctAns = leftnum * rightnum;
             if (leftnum < rightnum)
                 leftnum = rightnum;
             rightnum = tempNum;
-    case 3: // Multiply
+    case MT_MUL: // Multiply
         correctAns = leftnum * rightnum;
         mathSymbol = '*';
         break;
-        case 4: // devision
+        case MT_DIV: // devision
             correctAns = leftnum / rightnum;
             int tempNum = int leftnum;
             leftnum = rightnum;
             rightnum = tempNum;
-    case 4: // devision
+    caseMT_DIV: // devision
         correctAns = leftnum;
         leftnum *= rightnum;
         mathSymbol ='/';
         break;
 
     default:
-        cout << "Your math type is " << opNum << endl;
+        cout << "Your math type is " << MathType << endl;
         cout << "Please contact us for help" << endl;
         return -1;
 
     }
-    switch (opNum) {
+    switch (Mathtype) {
         default:
             class error_code;
 
