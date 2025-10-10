@@ -8,7 +8,8 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
     const int MAX_ATTEMPTS = 3;
 
     const int LEVEL_CHANGE_RANGE= 10;
@@ -107,6 +108,34 @@ int main() {
     {
         cout << "Looks like you should play this game again."<< endl;
         cout << "The correct answer was " << correctAns <<"." <<endl;
+    }
+    do
+    {
+    }
+    while (userAnswer == R"(yes  no)");
+
+    while (true)
+    {
+        cout<<"Do you want to continue (y/n) ";
+        getline(cin, userName);
+        for (int i = 0; i < userAnswer(); i++){
+            userAnswer = correctAns;
+
+        }
+        if (userAnswer == 'y');
+        (userAnswer=='n'){
+            break;
+        }
+        else
+        {
+         cout << "Invalid input!, please try again " << endl;
+            cout << endl;
+        }
+        for (int i = 1; i <  MAX_ATTEMPTS(); i++)
+        {
+            cout <<"[Level "<<mathType<< "]"<<userName<<",what does"
+                   <<leftnum<<mathSymbol<<rightnum<<" = ";
+        }
     }
 
     cout << endl;
