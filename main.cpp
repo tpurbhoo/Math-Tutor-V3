@@ -102,7 +102,7 @@ int main()
     if (userAnswer == correctAns)
     {
         cout << "Congrats! It looks like you are a math wizard." << endl;
-        cout << "Thank you for playing the game" << endl;
+        cout << "Thank you f  vcor playing the game" << endl;
     }
     else
     {
@@ -112,26 +112,25 @@ int main()
     do
     {
     }
-    while (userAnswer == R"(yes  no)");
 
-    while (true)
-    {
+    while (userAnswer != correctAns);{
+        cout << "No clue what you what yo do" << endl;};
+
+    while (true){
         cout<<"Do you want to continue (y/n) ";
         getline(cin, userName);
-        for (int i = 0; i < userAnswer(); i++){
+        for (int i = 0; i < userAnswer; i++){
             userAnswer = correctAns;
 
         }
-        if (userAnswer == 'y');
-        (userAnswer=='n'){
+        if (userAnswer == 'y'|| userAnswer=='n'){
             break;
         }
-        else
-        {
+        else{
          cout << "Invalid input!, please try again " << endl;
             cout << endl;
         }
-        for (int i = 1; i <  MAX_ATTEMPTS(); i++)
+        for (int i = 1; i <  MAX_ATTEMPTS; i++)
         {
             cout <<"[Level "<<mathType<< "]"<<userName<<",what does"
                    <<leftnum<<mathSymbol<<rightnum<<" = ";
