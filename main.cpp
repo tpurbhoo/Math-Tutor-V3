@@ -8,10 +8,13 @@
 
 using namespace std;
 
-int main() {
+
+int main()
+{
     const int MAX_ATTEMPTS = 3;
 
     const int LEVEL_CHANGE_RANGE = 10;
+
 
     enum MathType { MT_ADD = 1, MT_SUB = 2, MT_MUL = 3, MT_DIV = 4 };
     MathType mathType = MT_ADD;
@@ -23,6 +26,14 @@ int main() {
     int rightnum = 0;
     int totalCorrect= 0;
     int totalIncorrect= 0;
+    int attempts = 3;
+    bool persongetcorrect = true;
+    string userInput = "?";
+    int currentRange = 10;
+
+    int math_level = 1;
+
+
 
     string userName = "?";
 
@@ -53,41 +64,45 @@ int main() {
     cout << "Welcome " << userName << " to the Silly Simple Math Tutor." << endl;
     cout << endl;
 
-    do {
-        leftnum = rand() % 10 + 1;
-        rightnum = rand() % 10 + 1;
-        mathType = static_cast<MathType>(rand() % 4 + 1); //1 = add,2= subtract,3=mulitply,4=division
 
+    do{
+        if (persongetcorrect)
+    {
+        leftnum = rand() % currentRange + 1;
+        rightnum = rand() % currentRange + 1;
+        mathType = static_cast<MathType>(rand() % 4 + 1); //1 = add,2= subtract,3=mulitply,4=division
+    }
         switch (mathType) {
-            case MT_ADD: // addition
-                correctAns = leftnum + rightnum;
-                mathSymbol = '+';
-                break;
-            case MT_SUB: // subtraction
-                correctAns = leftnum - rightnum;
-                mathSymbol = '-';
-                if (leftnum < rightnum) {
-                    int tempNum = leftnum;
-                    leftnum = rightnum;
-                    rightnum = tempNum;
-                }
-                break;
-            case MT_MUL: // Multiply
-                correctAns = leftnum * rightnum;
-                mathSymbol = '*';
-                break;
-            case MT_DIV: // devision
-                correctAns = leftnum;
-                leftnum *= rightnum;
-                mathSymbol = '/';
-                break;
-            default:
-                cout << "Your math type is " << mathType << endl;
-                cout << "Please contact us for help" << endl;
-                return -1;
+        case MT_ADD: // addition
+            correctAns = leftnum + rightnum;
+            mathSymbol = '+';
+            break;
+        case MT_SUB: // subtraction
+            correctAns = leftnum - rightnum;
+            mathSymbol = '-';
+            if (leftnum < rightnum) {
+                int tempNum = leftnum;
+                leftnum = rightnum;
+                rightnum = tempNum;
+            }
+            break;
+        case MT_MUL: // Multiply
+            correctAns = leftnum * rightnum;
+            mathSymbol = '*';
+            break;
+        case MT_DIV: // division
+            correctAns = leftnum;
+            leftnum *= rightnum;
+            mathSymbol = '/';
+
+            break;
+        default:
+            cout << "Your math type is " << mathType << endl;
+            cout << "Please contact us for help" << endl;
+            return -1;
         }
 
-        cout << userName << " what is " << leftnum << mathSymbol << rightnum << " = ";
+        cout << "[LEVEL "<< "#" << math_level << "] " << userName << ", what is " << leftnum << mathSymbol << rightnum << " = ";
 
         // Loop until the user enters numeric data
         while (!(cin >> userAnswer)) {
@@ -99,50 +114,73 @@ int main() {
         } // end of get userAnswer while loop
 
         if (userAnswer == correctAns) {
-            cout << "Congrats! It looks like you are a math wizard." << endl;
-            cout << "Thank you for playing the game" << endl;
+            cout << "Congrats! That was correct :)" << endl;
+            totalCorrect++;
+            if (totalCorrect == 3)
+            {
+                math_level++;
+                totalCorrect =0;
+                cout << "WooHoo - Leveling you UP to " << math_level << endl;
+                attempts = 3;
+                currentRange += LEVEL_CHANGE_RANGE;
+                cout << "The numbers are now between 1 and " << currentRange << endl;
+
+            }
+            persongetcorrect = true;
         } else {
-            cout << "Looks like you should play this game again." << endl;
-            cout << "The correct answer was " << correctAns << "." << endl;
+
+            totalIncorrect++;
+            attempts--;
+
+            if (totalIncorrect == 3 && math_level > 1)
+            {
+                math_level--;
+                cout << "Sorry you are out of attempts" << endl;
+                cout << "The correct answer is " << correctAns << endl;
+                cout << "BooHoo - Leveling you DOWN to "<< math_level  <<endl;
+                totalIncorrect=0;
+                attempts = 3;
+                persongetcorrect = true;
+                currentRange -= LEVEL_CHANGE_RANGE;
+                cout << "The numbers are now between 1 and " << currentRange << endl;
+
+            }
+            else
+            {
+                if (attempts)
+                {
+                    cout << "Bummer, that was incorrect" << endl;
+                    cout << "You have " << attempts << " attempts left." << endl;
+            persongetcorrect = false;
+                }
+                else
+                {
+                    cout << "Sorry you are out of attempts" << endl;
+                    cout << "The correct answer is " << correctAns << endl;
+                    persongetcorrect = true;
+                }
+
+            }
         }
 
-        while (true) {
-            cout << "Do you want to continue (y/n) ";
-            getline(cin, userName);
-            for (int i = 0; i < userAnswer; i++) {
-                userAnswer = correctAns;
-            }
-            if (userAnswer == 'y' || userAnswer == 'n') {
-                break;
-            } else {
-                cout << "Invalid input!, please try again " << endl;
-                cout << endl;
-            }
-
-            if (userAnswer == correctAns) {
-                totalCorrect++;
-                cout << "correct" << endl;
+        while (true)
+        {
+            cout << "Do you want to continue (y=yes || n=no) ?";
+            cin >> userInput;
+            if (userInput == "yes" || userInput == "y" || userInput == "n"|| userInput == "no")
+            {
                 break;
             }
-
-
-            for (int i = 1; i < MAX_ATTEMPTS; i++) {
-                cout << "[Level " << mathType << "]" << userName << ",what does"
-                        << leftnum << mathSymbol << rightnum << " = ";
-
-                if (userAnswer == correctAns) {
-                    totalCorrect++;
-                    cout << "correct" << endl;
-                    break;
-                }
-                else {
-                    if (i == MAX_ATTEMPTS) {
-                        cout << "I'm sorry,you're out of attempts." << endl;
-                        cout << "The correct answer was : " << correctAns << endl;
-                        totalIncorrect++;
-                    }
-                }
-            }while (userAnswer == "yes" || userAnswer == "y");
+            else
+            {
+                cout << "Wrong input!. Please enter y or yes or n or no" << endl;
+            }
         }
-        return 0;
-    }
+
+
+    }while (userInput == "yes" || userInput == "y");
+
+    cout << "Thanks for playing the game" << endl;
+
+    return  0;
+}
